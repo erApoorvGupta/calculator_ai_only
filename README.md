@@ -1,35 +1,31 @@
-# FastAPI Calculator API
+# Scientific Calculator - FastAPI Backend and Next.js Frontend
 
-A simple calculator API built with FastAPI that allows users to perform basic arithmetic operations.
-
-## Features
-
-- Addition (`/add`)
-- Subtraction (`/subtract`)
-- Multiplication (`/multiply`)
-- Division (`/divide`)
+This project implements a scientific calculator with a Python FastAPI backend and a Next.js frontend.
 
 ## Project Structure
 
-```
-.
-├── main.py         # FastAPI application and calculator logic
-├── requirements.txt  # Python dependencies
-└── README.md       # This file
-```
+The project is organized into two main directories:
 
-## Setup and Installation
+-   `/backend`: Contains the FastAPI application that provides the calculator logic and API endpoints.
+-   `/frontend`: Contains the Next.js application that provides the user interface.
 
-1.  **Clone the repository (if applicable):**
+Each directory has its own README with more specific instructions if needed, but basic setup and run commands are provided below.
+
+## Backend (FastAPI)
+
+The backend provides API endpoints for basic arithmetic and scientific calculations.
+
+### Setup & Running (Backend)
+
+1.  **Navigate to the backend directory:**
     ```bash
-    # git clone <repository-url>
-    # cd <repository-directory>
+    cd backend
     ```
 
-2.  **Create and activate a virtual environment (recommended):**
+2.  **Create a virtual environment (recommended):**
     ```bash
     python -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    source venv/bin/activate  # On Windows: venv\Scripts\activate
     ```
 
 3.  **Install dependencies:**
@@ -37,85 +33,44 @@ A simple calculator API built with FastAPI that allows users to perform basic ar
     pip install -r requirements.txt
     ```
 
-## Running the Application
+4.  **Run the FastAPI server:**
+    ```bash
+    uvicorn main:app --reload
+    ```
+    The backend API will typically be available at `http://127.0.0.1:8000`.
+    You can see the API documentation at `http://127.0.0.1:8000/docs`.
 
-To run the FastAPI application, use Uvicorn:
+## Frontend (Next.js)
 
-```bash
-uvicorn main:app --reload
-```
+The frontend provides a web interface for the calculator, including an animated "magnet lines" background.
 
--   `main`: refers to the `main.py` file.
--   `app`: refers to the `app = FastAPI()` instance in `main.py`.
--   `--reload`: enables auto-reloading when code changes are detected (useful for development).
+### Setup & Running (Frontend)
 
-The API will typically be available at `http://127.0.0.1:8000`.
+1.  **Navigate to the frontend application directory:**
+    ```bash
+    cd frontend/calculator-ui
+    ```
 
-## API Endpoints
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    # or
+    # yarn install
+    ```
 
-All calculator endpoints expect two query parameters: `x` (float) and `y` (float).
+3.  **Run the Next.js development server:**
+    ```bash
+    npm run dev
+    # or
+    # yarn dev
+    ```
+    The frontend application will typically be available at `http://localhost:3000`.
 
-### Root
+## Using the Calculator
 
--   **GET /**
-    -   Returns a welcome message.
-    -   Example: `curl http://127.0.0.1:8000/`
-    -   Response:
-        ```json
-        {"message":"Calculator API is running!"}
-        ```
+Open your browser and navigate to the frontend URL (usually `http://localhost:3000`). The frontend will make API calls to the backend (usually running on `http://localhost:8000`). Ensure both servers are running.
 
-### Addition
+You can configure the backend API URL for the frontend by setting the `NEXT_PUBLIC_API_BASE_URL` environment variable in a `.env.local` file within the `frontend/calculator-ui` directory. For example:
+`NEXT_PUBLIC_API_BASE_URL=http://127.0.0.1:8000`
 
--   **GET /add?x=<value>&y=<value>**
-    -   Adds two numbers.
-    -   Example: `curl "http://127.0.0.1:8000/add?x=5&y=3"`
-    -   Response:
-        ```json
-        {"x":5.0,"y":3.0,"operation":"addition","result":8.0}
-        ```
-
-### Subtraction
-
--   **GET /subtract?x=<value>&y=<value>**
-    -   Subtracts the second number from the first.
-    -   Example: `curl "http://127.0.0.1:8000/subtract?x=10&y=4"`
-    -   Response:
-        ```json
-        {"x":10.0,"y":4.0,"operation":"subtraction","result":6.0}
-        ```
-
-### Multiplication
-
--   **GET /multiply?x=<value>&y=<value>**
-    -   Multiplies two numbers.
-    -   Example: `curl "http://127.0.0.1:8000/multiply?x=7&y=6"`
-    -   Response:
-        ```json
-        {"x":7.0,"y":6.0,"operation":"multiplication","result":42.0}
-        ```
-
-### Division
-
--   **GET /divide?x=<value>&y=<value>**
-    -   Divides the first number by the second.
-    -   Example: `curl "http://127.0.0.1:8000/divide?x=10&y=2"`
-    -   Response:
-        ```json
-        {"x":10.0,"y":2.0,"operation":"division","result":5.0}
-        ```
-    -   **Error Handling (Division by Zero):**
-        -   Example: `curl "http://127.0.0.1:8000/divide?x=10&y=0"`
-        -   Response (Status Code 400):
-            ```json
-            {"detail":"Cannot divide by zero"}
-            ```
-
-## Interactive API Documentation
-
-FastAPI automatically generates interactive API documentation. Once the server is running, you can access it at:
-
--   Swagger UI: `http://127.0.0.1:8000/docs`
--   ReDoc: `http://127.0.0.1:8000/redoc`
-
-These interfaces allow you to explore and test the API endpoints directly from your browser.
+If this variable is not set, it defaults to `http://localhost:8000`.
