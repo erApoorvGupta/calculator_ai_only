@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: white;
+  color: black; /* Default text color */
+}
+
+/* Define some theme colors for easier use - can be expanded in tailwind.config.js later */
+:root {
+  --color-background: white;
+  --color-text-default: black;
+  --color-accent-orange: orange;
+  --color-grey-light: #f0f0f0;
+  --color-grey-medium: #cccccc;
+  --color-grey-dark: #888888;
+}

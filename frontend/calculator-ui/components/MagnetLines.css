@@ -1,0 +1,20 @@
+.magnetLines-container {
+  display: grid;
+  /* grid-template-columns: repeat(var(--columns), 1fr); /* Handled by inline style */
+  /* grid-template-rows: repeat(var(--rows), 1fr);    /* Handled by inline style */
+
+  justify-items: center;
+  align-items: center;
+
+  /* width: 80vmin; /* Handled by props */
+  /* height: 80vmin; /* Handled by props */
+}
+
+.magnetLines-container span {
+  display: block;
+  transform-origin: center;
+  will-change: transform;
+  /* --rotate is a CSS variable set by JS */
+  transform: rotate(var(--rotate));
+  transition: transform 0.2s ease-out; /* Added a small transition for smoothness */
+}
